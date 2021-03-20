@@ -1,6 +1,7 @@
 package org.sofia.generator;
 
 import org.jetbrains.annotations.NotNull;
+import org.sofia.generator.core.DayOfTheWeek;
 
 import java.time.LocalTime;
 

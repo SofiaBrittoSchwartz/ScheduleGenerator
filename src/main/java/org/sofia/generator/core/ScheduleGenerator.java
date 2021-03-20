@@ -1,5 +1,7 @@
 package org.sofia.generator;
 
+import org.sofia.generator.core.TimeInterval;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
