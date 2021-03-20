@@ -1,28 +1,32 @@
 package org.sofia.generator;
 
-import java.util.HashMap;
+import org.sofia.generator.core.TimeInterval;
+
 import java.util.List;
 
+//TODO: Make this extend Employee abstract class that contains name and availabilities
 public class Tutor {
     public String name;
     public List<TimeInterval> availabilities;
-    /*
-    * [0] - TimeInterval(day, startTime, endTime) - with Comparable functionality, in future could include timeZone
-    * [1] - List (to hide implementation details)
-    */
     public boolean isExperiencedTutor;
     public boolean hasCar;
 
-    public Tutor(String name, boolean isExperiencedTutor, boolean hasCar) {
+    public Tutor(String name, boolean isExperiencedTutor, boolean hasCar, List<TimeInterval> availabilities) {
         this.name = name;
         this.isExperiencedTutor = isExperiencedTutor;
         this.hasCar = hasCar;
     }
 
-    // why not make this part of constructor?
-    public void setAvailabilities(List<TimeInterval> availabilities) {
-        this.availabilities = availabilities;
-    }
+    // TODO: Implement getAvailability(dayOfWeek) - Get tutor's availabilities on given day.
 
-    // getAvailability(dayOfWeek) - get info from availabilities
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("\n" + name + "\n\t");
+        builder.append("isExperienced: " + (isExperiencedTutor ? "✔" : "X") + "\t");
+        builder.append("hasCar: " + (hasCar ? "✔" : "X"));
+
+        return builder.toString();
+    }
 }

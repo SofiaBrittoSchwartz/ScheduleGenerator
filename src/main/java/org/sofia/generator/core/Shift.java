@@ -1,4 +1,6 @@
-package org.sofia.generator;
+package org.sofia.generator.core;
+
+import org.sofia.generator.Tutor;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -12,7 +14,7 @@ public abstract class Shift {
     ShiftRequirements requirements;
     List<Tutor> assignedTutors;
 
-    public Shift(ShiftRequirements requirements, DayOfTheWeek day, LocalTime startTime, LocalTime endTime) {
+    public Shift(ShiftRequirements requirements, DayOfTheWeek day, LocalTime startTime, LocalTime endTime) throws IllegalArgumentException{
         if(requirements == null) throw new IllegalArgumentException("requirements must be nonNull");
         this.requirements = requirements;
         this.shiftTimes = new TimeInterval(day, startTime, endTime);
@@ -27,16 +29,38 @@ public abstract class Shift {
         return shiftTimes.getEndTime();
     }
 
+    public List<Tutor> getAssignedTutors() {
+        return assignedTutors;
+    }
+
+    public ShiftRequirements getRequirements() {
+        return requirements;
+    }
+
+    public final void addAll(List<Tutor> tutors) {
+        for(Tutor tutor: tutors) {
+            addTutor(tutor);
+        }
+    }
+
     /**
      * Put generic checks here
      */
-    public final int addTutor(Tutor tutor) throws ShiftException {
-        if(assignedTutors.size() >= requirements.maxTutors) throw new ShiftException(1, "No more tutors can be added to this shift.");
+    public final void addTutor(Tutor tutor) throws ShiftException {
+        if(assignedTutors.size() >= requirements.maxTutors) throw new ShiftException(1, "This shift is full. No more tutors can be added.");
+        // maybe just return if tutor already in the shift instead of throwing error - this should never occur anyway...
         if(assignedTutors.contains(tutor)) throw new ShiftException(2, "This tutor is already assigned to this shift.");
-        return doAddTutor(tutor);
+        doAddTutor(tutor);
+        assignedTutors.add(tutor);
     }
 
-    protected abstract int doAddTutor(Tutor tutor);
+    protected abstract void doAddTutor(Tutor tutor);
+
+    public final void removeTutor(Tutor tutor) {
+        // TODO Implement removeTutor
+    }
+
+    protected abstract void doRemoveTutor(Tutor tutor);
 
     public final boolean isValidShift() {
         boolean isValid = true;
@@ -45,7 +69,7 @@ public abstract class Shift {
         long minInShift = Duration.between(shiftTimes.getStartTime(), shiftTimes.getEndTime()).getSeconds() / 60;
         isValid = isValid &&
                 (minInShift <= requirements.maxMinutesPerShift) &&
-                (minInShift <= requirements.minMinutesPerShift);
+                (minInShift >= requirements.minMinutesPerShift);
 
         isValid = isValid &&
                 (requirements.minTutors <= assignedTutors.size()) &&

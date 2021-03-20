@@ -1,7 +1,6 @@
-package org.sofia.generator;
+package org.sofia.generator.core;
 
 public class ShiftRequirements {
-    // should this be static?
     // shift length is stored in minutes instead of hours to allow for further flexibility
     // and to make future calculations simpler.
     int minMinutesPerShift;
@@ -9,9 +8,9 @@ public class ShiftRequirements {
     int minTutors;
     int maxTutors;
 
-    // move these to Shift class?
-    int minCars = 1;
-    int minExperiencedTutors = 1;
+    // move these to TutorShiftRequirements class?
+    public final int minCars = 1;
+    public final int minExperiencedTutors = 1;
 
     public void setShiftLength(double minHoursPerShift, double maxHoursPerShift) {
         this.minMinutesPerShift = (int)(minHoursPerShift * 60);
@@ -26,5 +25,21 @@ public class ShiftRequirements {
     public void setNumTutors(int minTutors, int maxTutors) {
         this.minTutors = minTutors;
         this.maxTutors = maxTutors;
+    }
+
+    public int getMaxTutors() {
+        return maxTutors;
+    }
+
+    public int getMinTutors() {
+        return minTutors;
+    }
+
+    public int getMaxMinutesPerShift() {
+        return maxMinutesPerShift;
+    }
+
+    public int getMinMinutesPerShift() {
+        return minMinutesPerShift;
     }
 }

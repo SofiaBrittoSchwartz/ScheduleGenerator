@@ -1,4 +1,4 @@
-package org.sofia.generator;
+package org.sofia.generator.core;
 
 public enum DayOfTheWeek {
     SUNDAY,

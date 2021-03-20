@@ -2,6 +2,7 @@ package org.sofia.generator
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.sofia.generator.core.TimeInterval
 import java.time.LocalTime
 
 class TimeIntervalTest {
@@ -9,23 +10,23 @@ class TimeIntervalTest {
     companion object {
         val interval1 = TimeInterval(
             1,
-            LocalTime.of(10,0),
+            LocalTime.of(10, 0),
             LocalTime.of(11, 30)
         )
         val interval2 = TimeInterval(
             1,
-            LocalTime.of(10,10),
+            LocalTime.of(10, 10),
             LocalTime.of(11, 0)
         )
         val interval3 = TimeInterval(
             2,
-            LocalTime.of(10,10),
+            LocalTime.of(10, 10),
             LocalTime.of(11, 0)
         )
         val interval4 = TimeInterval(
             2,
             LocalTime.of(11, 30),
-            LocalTime.of(12,0)
+            LocalTime.of(12, 0)
         )
     }
 

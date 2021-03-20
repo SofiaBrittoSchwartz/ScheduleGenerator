@@ -1,6 +1,6 @@
-package org.sofia.generator;
+package org.sofia.generator.core;
 
-import org.sofia.generator.core.TimeInterval;
+import org.sofia.generator.Tutor;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -10,9 +10,7 @@ import java.util.List;
 public class ScheduleGenerator {
     public static void main(String[] args) {
         List<Tutor> tutors = new ArrayList<>();
-        Tutor tutor1 = new Tutor("Alice", true, true);
-        HashMap avails = generateDefaultAvailabilities();
-//        tutor1.setAvailabilities();
+        Tutor tutor1 = new Tutor("Alice", true, true, new ArrayList<>());
     }
 
     private static HashMap generateDefaultAvailabilities() {

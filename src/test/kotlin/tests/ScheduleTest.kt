@@ -1,7 +1,7 @@
 package tests
 
 import org.junit.jupiter.api.Test
-import org.sofia.generator.Schedule
+import org.sofia.generator.core.Schedule
 
 class ScheduleTest {
     @Test
